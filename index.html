@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Macro Tracker AI</title>
+    <!-- Modern Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1>Macro Tracker <span class="accent">AI</span></h1>
+        <p>Snap your food. Get your macros instantly.</p>
+      </header>
+
+      <main>
+        <!-- Upload Section -->
+        <div class="upload-card" id="uploadSection">
+          <label for="foodImage" class="upload-label">
+            <div class="upload-icon">📸</div>
+            <span class="upload-text">Choose an image or take a photo</span>
+            <input type="file" id="foodImage" accept="image/*" />
+          </label>
+        </div>
+
+        <!-- Image Preview (Hidden initially) -->
+        <div class="preview-card hidden" id="previewContainer">
+            <img id="imagePreview" src="" alt="Food preview" />
+        </div>
+
+        <!-- Loading State (Hidden initially) -->
+        <div class="loading-state hidden" id="loadingState">
+            <div class="spinner"></div>
+            <p>Analyzing your dish with AI...</p>
+        </div>
+
+        <!-- Results Card (Hidden initially) -->
+        <div class="results-card hidden" id="resultsCard">
+            <h2 id="foodName">...</h2>
+            <div class="macros-grid">
+                <div class="macro-item calories">
+                    <span class="macro-value" id="macroCalories">0</span>
+                    <span class="macro-label">kcal</span>
+                </div>
+                <div class="macro-item protein">
+                    <span class="macro-value" id="macroProtein">0g</span>
+                    <span class="macro-label">Protein</span>
+                </div>
+                <div class="macro-item carbs">
+                    <span class="macro-value" id="macroCarbs">0g</span>
+                    <span class="macro-label">Carbs</span>
+                </div>
+                <div class="macro-item fat">
+                    <span class="macro-value" id="macroFat">0g</span>
+                    <span class="macro-label">Fat</span>
+                </div>
+            </div>
+            <button id="resetBtn" class="reset-btn">Scan Another Dish</button>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
