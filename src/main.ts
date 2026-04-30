@@ -51,21 +51,40 @@ async function handleFileUpload(event: Event) {
   };
   reader.readAsDataURL(file);
 
-  // Generate a unique ID using timestamp to ensure every upload is treated as new
-  // This prevents caching issues where a previous failed upload (error: true) prevents retries
-  const uniqueId = `img_${Date.now()}_${file.size}`;
-  const fileExtension = file.name.split('.').pop() || 'jpg';
-  const filePath = `food_photos/${uniqueId}.${fileExtension}`;
-
+  // 4. Generate deterministic ID to check if we already processed this image
+  const baseId = (file.name.replace(/[^a-zA-Z0-9]/g, '_') + '_' + file.size).substring(0, 50);
+  
   try {
-    // 4. Upload to Firebase Storage
+    // Check if we already have a successful result for this exact image
+    const docRef = doc(db, 'daily_entries', baseId);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      // If we have valid macros and no error, we can skip the upload!
+      if (!data.error && data.macros) {
+        console.log("Image already processed! Skipping upload.");
+        showResults(data);
+        return;
+      }
+    }
+
+    // If it didn't exist or had an error, we upload it.
+    // If it had an error before, we append a timestamp so we don't get stuck polling the old error flag.
+    const uniqueId = docSnap.exists() && docSnap.data().error 
+      ? `${baseId}_${Date.now()}` 
+      : baseId;
+      
+    const fileExtension = file.name.split('.').pop() || 'jpg';
+    const filePath = `food_photos/${uniqueId}.${fileExtension}`;
+
+    // 5. Upload to Firebase Storage
     const storageRef = ref(storage, filePath);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        // We could show progress here if we wanted
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress.toFixed(0) + '% done');
       },
@@ -76,7 +95,7 @@ async function handleFileUpload(event: Event) {
       },
       () => {
         console.log("Upload complete. Waiting for AI analysis...");
-        // 5. Start listening to Firestore once upload completes
+        // 6. Start listening to Firestore once upload completes
         listenForResults(uniqueId);
       }
     );
@@ -140,6 +159,18 @@ function showResults(data: any) {
   macroProtein.textContent = data.macros.protein.toString() + 'g';
   macroCarbs.textContent = data.macros.carbs.toString() + 'g';
   macroFat.textContent = data.macros.fat.toString() + 'g';
+
+  // Update Data Source Badge
+  const dataSourceBadge = document.getElementById('dataSourceBadge');
+  if (dataSourceBadge) {
+    if (data.dataSource === "API" || data.dataSource === "api") {
+        dataSourceBadge.textContent = "✓ Verified by OpenFoodFacts";
+        dataSourceBadge.className = "data-source-badge api";
+    } else {
+        dataSourceBadge.textContent = "✨ Estimated by AI";
+        dataSourceBadge.className = "data-source-badge estimation";
+    }
+  }
 }
 
 function resetApp() {

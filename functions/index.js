@@ -91,13 +91,15 @@ exports.analyzeDish = onObjectFinalized({
         Return STRICTLY a JSON object with this exact structure, without any additional text:
         {
             "food": "Name of the dish (e.g., Chicken breast with rice)",
+            "dataSource": "API" or "Estimation",
             "macros": {
                 "calories": 450,
                 "protein": 35,
                 "carbs": 40,
                 "fat": 12
             }
-        }`;
+        }
+        Use "API" for dataSource if you successfully used the searchOpenFoodFacts tool and incorporated its data. Use "Estimation" if you used your own judgement or the tool failed.`;
 
         let conversationHistory = [
             { 
