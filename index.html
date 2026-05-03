@@ -4,16 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Macro Tracker AI</title>
-    <!-- Modern Font: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <div class="app-container">
+    <!-- ================= LOGIN SECTION ================= -->
+    <div class="login-container">
+      <div class="login-box">
+        <h1>Macro Tracker <span class="accent">AI</span></h1>
+        <p>Login to continue</p>
+
+        <input id="email" type="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Password" />
+
+        <button onclick="login()">Login</button>
+      </div>
+    </div>
+
+    <!-- ================= MAIN APP ================= -->
+    <div class="app-container hidden" id="app">
       <header>
         <h1>Macro Tracker <span class="accent">AI</span></h1>
         <p>Snap your food. Get your macros instantly.</p>
+
+        <!-- History button (opens popup) -->
+        <button onclick="showHistory()" class="history-btn">History</button>
       </header>
 
       <main>
@@ -26,45 +48,68 @@
           </label>
         </div>
 
-        <!-- Image Preview (Hidden initially) -->
+        <!-- Image Preview -->
         <div class="preview-card hidden" id="previewContainer">
-            <img id="imagePreview" src="" alt="Food preview" />
+          <img id="imagePreview" src="" alt="Food preview" />
         </div>
 
-        <!-- Loading State (Hidden initially) -->
+        <!-- Loading State -->
         <div class="loading-state hidden" id="loadingState">
-            <div class="spinner"></div>
-            <p>Analyzing your dish with AI...</p>
+          <div class="spinner"></div>
+          <p>Analyzing your dish with AI...</p>
         </div>
 
-        <!-- Results Card (Hidden initially) -->
+        <!-- Results -->
         <div class="results-card hidden" id="resultsCard">
-            <div class="results-header">
-                <h2 id="foodName">...</h2>
-                <span id="dataSourceBadge" class="data-source-badge"></span>
+          <div class="results-header">
+            <h2 id="foodName">...</h2>
+            <span id="dataSourceBadge" class="data-source-badge"></span>
+          </div>
+
+          <div class="macros-grid">
+            <div class="macro-item calories">
+              <span class="macro-value" id="macroCalories">0</span>
+              <span class="macro-label">kcal</span>
             </div>
-            <div class="macros-grid">
-                <div class="macro-item calories">
-                    <span class="macro-value" id="macroCalories">0</span>
-                    <span class="macro-label">kcal</span>
-                </div>
-                <div class="macro-item protein">
-                    <span class="macro-value" id="macroProtein">0g</span>
-                    <span class="macro-label">Protein</span>
-                </div>
-                <div class="macro-item carbs">
-                    <span class="macro-value" id="macroCarbs">0g</span>
-                    <span class="macro-label">Carbs</span>
-                </div>
-                <div class="macro-item fat">
-                    <span class="macro-value" id="macroFat">0g</span>
-                    <span class="macro-label">Fat</span>
-                </div>
+
+            <div class="macro-item protein">
+              <span class="macro-value" id="macroProtein">0g</span>
+              <span class="macro-label">Protein</span>
             </div>
-            <button id="resetBtn" class="reset-btn">Scan Another Dish</button>
+
+            <div class="macro-item carbs">
+              <span class="macro-value" id="macroCarbs">0g</span>
+              <span class="macro-label">Carbs</span>
+            </div>
+
+            <div class="macro-item fat">
+              <span class="macro-value" id="macroFat">0g</span>
+              <span class="macro-label">Fat</span>
+            </div>
+          </div>
+
+          <button id="resetBtn" class="reset-btn">Scan Another Dish</button>
         </div>
       </main>
     </div>
+
+    <!-- ================= HISTORY POPUP (MODAL) ================= -->
+    <!-- Bu kısım sayfanın en altına konur -->
+    <div id="historyModal" class="modal hidden">
+      <div class="modal-content">
+        <!-- Close button -->
+        <span class="close-btn" onclick="closeHistory()">&times;</span>
+
+        <!-- Title -->
+        <h2>My History</h2>
+
+        <!-- History items buraya JS ile eklenecek -->
+        <div id="historyContainer"></div>
+      </div>
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+    <!-- main.ts en sonda olmalı -->
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

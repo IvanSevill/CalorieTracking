@@ -277,3 +277,194 @@ input[type="file"] {
     grid-template-columns: 1fr;
   }
 }
+
+
+.hidden {
+  display: none;
+}
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 42px 36px;
+  border-radius: 24px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.login-box h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.login-box p {
+  color: #94a3b8;
+  margin-bottom: 28px;
+  font-size: 16px;
+}
+
+.login-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: #0f172a;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+.login-box input:focus {
+  border-color: #3b82f6;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  transform: translateY(-1px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.history-btn {
+  margin-top: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.history-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 16px auto;
+  max-width: 500px;
+  color: white;
+}
+
+#historyContainer {
+  width: 100%;
+  max-width: 560px;
+  margin: 28px auto 24px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
+#historyContainer h2 {
+  margin: 0 0 14px;
+  font-size: 26px;
+}
+
+#historyContainer > p {
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.history-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 14px;
+  color: white;
+}
+
+.history-card p {
+  margin: 7px 0;
+  color: #cbd5e1;
+}
+
+.history-card p:first-child {
+  font-size: 20px;
+  color: white;
+}
+
+.history-btn {
+  margin-top: 16px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+.history-btn:hover {
+  transform: translateY(-1px);
+}
+/* MODAL BACKGROUND */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* MODAL BOX */
+.modal-content {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  padding: 24px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  color: white;
+  position: relative;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* HISTORY CARDS */
+.history-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px;
+  margin-top: 12px;
+}
